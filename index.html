@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Standarisasi Pemerintahan Desa — Kabupaten Kampar</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f5f0;color:#1a1a18;font-size:14px;min-height:100vh}
+
+.top-bar{background:#3C3489;color:#fff;padding:10px 24px;font-size:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
+.top-bar span{opacity:0.8}
+
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 48px}
+
+/* HERO */
+.hero{border-radius:14px;background:#EEEDFE;border:1px solid #AFA9EC;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.hero-icon{width:52px;height:52px;border-radius:12px;background:#534AB7;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-icon svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8}
+.hero-title{font-size:17px;font-weight:700;color:#26215C;margin-bottom:4px}
+.hero-sub{font-size:12px;color:#534AB7}
+
+/* YEAR SWITCHER */
+.year-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;background:#fff;border:1px solid #e8e7e0;border-radius:12px;padding:10px 16px;flex-wrap:wrap}
+.year-label{font-size:12px;color:#888780;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px;white-space:nowrap}
+.year-btn{padding:7px 20px;border-radius:8px;border:1px solid #d0cfc8;font-size:13px;font-weight:600;cursor:pointer;background:#f5f5f0;color:#5F5E5A;transition:all 0.15s;font-family:inherit}
+.year-btn.on{background:#3C3489;color:#fff;border-color:#3C3489}
+.year-btn:hover:not(.on){background:#EEEDFE;border-color:#AFA9EC;color:#3C3489}
+.year-badge{margin-left:auto;font-size:11px;padding:3px 10px;border-radius:20px;background:#EEEDFE;color:#3C3489;font-weight:600;white-space:nowrap}
+
+/* COMPARISON TOGGLE */
+.compare-btn{padding:7px 14px;border-radius:8px;border:1px solid #d0cfc8;font-size:12px;cursor:pointer;background:#fff;color:#5F5E5A;transition:all 0.15s;font-family:inherit;display:flex;align-items:center;gap:5px}
+.compare-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8}
+.compare-btn.on{background:#185FA5;color:#fff;border-color:#185FA5}
+
+.add-btn{padding:7px 14px;border-radius:8px;border:1px dashed #534AB7;font-size:12px;cursor:pointer;background:#fff;color:#534AB7;font-weight:600;transition:all 0.15s;font-family:inherit;display:flex;align-items:center;gap:5px}
+.add-btn:hover{background:#EEEDFE}
+.add-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* YEAR PANELS */
+.year-panel{display:none}
+.year-panel.on{display:block}
+
+/* COMPARE VIEW */
+.compare-panel{display:none}
+.compare-panel.on{display:block}
+
+/* SECTION NAV */
+.nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.nav-btn{padding:7px 16px;border-radius:20px;border:1px solid #d0cfc8;font-size:12px;cursor:pointer;background:#fff;color:#5F5E5A;transition:all 0.15s;display:flex;align-items:center;gap:5px;font-family:inherit}
+.nav-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+.nav-btn.on{background:#534AB7;color:#fff;border-color:#534AB7}
+.nav-btn:hover:not(.on){background:#f0efe8}
+
+.sec{display:none}
+.sec.on{display:block}
+
+/* CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:18px}
+.stat{background:#fff;border-radius:10px;padding:16px;text-align:center;border:1px solid #e8e7e0}
+.stat-val{font-size:20px;font-weight:700;color:#534AB7;margin-bottom:3px}
+.stat-label{font-size:11px;color:#888780}
+.stat-delta{font-size:11px;margin-top:3px;font-weight:600}
+.stat-delta.up{color:#27500A}
+.stat-delta.same{color:#888780}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px}
+.card{background:#fff;border:1px solid #e8e7e0;border-radius:13px;padding:16px 18px;margin-bottom:14px}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #f0efe8;flex-wrap:wrap}
+.card-head svg{width:18px;height:18px;stroke:#534AB7;fill:none;stroke-width:1.8;flex-shrink:0}
+.card-head-label{font-size:13px;font-weight:600;color:#5F5E5A}
+.card-head-pill{margin-left:auto}
+
+.row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f5f0;gap:8px}
+.row:last-child{border-bottom:none}
+.row-label{font-size:13px;color:#1a1a18;flex:1}
+.row-sub{font-size:11px;color:#888780;margin-top:1px}
+.row-val{font-size:13px;font-weight:600;color:#185FA5;text-align:right;white-space:nowrap}
+.row-range{font-size:11px;color:#888780;text-align:right}
+
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.pill-pro{background:#EEEDFE;color:#3C3489}
+.pill-green{background:#EAF3DE;color:#27500A}
+.pill-amber{background:#FAEEDA;color:#633806}
+.pill-blue{background:#E6F1FB;color:#0C447C}
+.pill-red{background:#FBE7E5;color:#8C2A20}
+.pill-gray{background:#eeece6;color:#5F5E5A}
+
+.note{font-size:12px;color:#5F5E5A;background:#f5f5f0;border-radius:8px;padding:9px 12px;margin-top:10px;border-left:3px solid #534AB7;line-height:1.5}
+.note.warn{border-left-color:#C0532B;background:#FBF1EA}
+
+.tier{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;background:#f5f5f0;margin-bottom:6px}
+.tier:last-child{margin-bottom:0}
+.tier-label{font-size:12px;color:#5F5E5A}
+.tier-val{font-size:13px;font-weight:700;color:#534AB7}
+
+.group-label{font-size:11px;font-weight:700;color:#888780;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;padding-left:2px}
+.section-sep{margin-top:14px;padding-top:12px;border-top:1px solid #f0efe8}
+
+.map-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f0;align-items:flex-start}
+.map-item:last-child{border-bottom:none}
+.map-dot{width:36px;height:36px;border-radius:8px;background:#E6F1FB;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.map-dot svg{width:16px;height:16px;stroke:#185FA5;fill:none;stroke-width:1.8}
+.map-kec{font-size:12px;color:#5F5E5A;line-height:1.5;flex:1}
+.map-rp{font-size:14px;font-weight:700;color:#185FA5;white-space:nowrap}
+
+/* TABLES */
+.cmp-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:13px;overflow:hidden;border:1px solid #e8e7e0;margin-bottom:14px}
+.cmp-table th{padding:10px 14px;background:#3C3489;color:#fff;font-weight:600;font-size:12px;text-align:center}
+.cmp-table th:first-child{text-align:left}
+.cmp-table td{padding:9px 14px;border-bottom:1px solid #f0efe8;vertical-align:middle}
+.cmp-table tr:last-child td{border-bottom:none}
+.cmp-table tr:hover td{background:#f9f8ff}
+.cmp-num{text-align:center;font-weight:600;color:#185FA5}
+.cmp-up{color:#27500A;font-weight:700}
+.cmp-same{color:#888780}
+.cmp-na{color:#b8b6ad;font-style:italic}
+.cmp-section{background:#f5f5f0!important;font-weight:700;font-size:12px;color:#3C3489;text-transform:uppercase;letter-spacing:0.05em}
+
+.mini-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:4px}
+.mini-table th{background:#f5f5f0;color:#5F5E5A;font-weight:700;padding:7px 8px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.03em}
+.mini-table td{padding:7px 8px;border-bottom:1px solid #f5f5f0}
+.mini-table td.n{text-align:center;color:#185FA5;font-weight:600}
+.mini-table tr:last-child td{border-bottom:none}
+
+/* STATUS BANNER */
+.status-banner{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;margin-bottom:18px;font-size:12.5px}
+.status-banner.ok{background:#EAF3DE;color:#27500A;border:1px solid #cfe3b6}
+.status-banner.warn{background:#FAEEDA;color:#633806;border:1px solid #f0d9a6}
+.status-banner.dead{background:#FBE7E5;color:#8C2A20;border:1px solid #f3c6c0}
+.status-banner svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.status-banner b{font-weight:700}
+
+/* PLACEHOLDER */
+.placeholder{background:#fff;border:2px dashed #d0cfc8;border-radius:13px;padding:40px;text-align:center;color:#888780}
+.placeholder svg{width:40px;height:40px;stroke:#d0cfc8;fill:none;stroke-width:1.5;margin-bottom:12px}
+.placeholder p{font-size:14px;margin-bottom:4px;color:#5F5E5A}
+.placeholder small{font-size:12px}
+
+footer{text-align:center;font-size:12px;color:#888780;margin-top:32px;padding-top:16px;border-top:1px solid #e8e7e0;line-height:1.6}
+
+/* ===== MODAL: TAMBAH PERATURAN ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,24,0.5);z-index:100;align-items:flex-start;justify-content:center;padding:30px 16px;overflow-y:auto}
+.modal-overlay.on{display:flex}
+.modal-box{background:#fff;border-radius:16px;max-width:640px;width:100%;padding:0;overflow:hidden;margin-bottom:30px}
+.modal-head{background:#3C3489;color:#fff;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{font-size:15px;font-weight:700}
+.modal-head p{font-size:11.5px;opacity:0.85;margin-top:2px}
+.modal-close{background:rgba(255,255,255,0.15);border:none;color:#fff;width:28px;height:28px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-body{padding:20px 22px}
+.form-row{margin-bottom:14px}
+.form-row label{display:block;font-size:11.5px;font-weight:700;color:#5F5E5A;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:5px}
+.form-row input[type=text],.form-row input[type=number]{width:100%;padding:9px 12px;border:1px solid #d0cfc8;border-radius:8px;font-size:13px;font-family:inherit;color:#1a1a18}
+.form-row input:focus{outline:none;border-color:#534AB7}
+.form-grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.upload-box{border:2px dashed #AFA9EC;border-radius:10px;padding:16px;text-align:center;background:#f9f8ff;cursor:pointer;transition:all .15s}
+.upload-box:hover{background:#EEEDFE}
+.upload-box svg{width:24px;height:24px;stroke:#534AB7;fill:none;stroke-width:1.8;margin-bottom:6px}
+.upload-box p{font-size:12.5px;color:#534AB7;font-weight:600}
+.upload-box small{font-size:11px;color:#888780;display:block;margin-top:2px}
+.upload-status{font-size:12px;color:#27500A;margin-top:8px;background:#EAF3DE;padding:8px 10px;border-radius:8px;display:none}
+.upload-status.on{display:block}
+.extract-box{margin-top:10px}
+.extract-box textarea{width:100%;height:110px;font-family:'Consolas',monospace;font-size:11px;border:1px solid #e8e7e0;border-radius:8px;padding:10px;resize:vertical;color:#5F5E5A;background:#fafaf7}
+
+.rows-table{width:100%;border-collapse:collapse;margin-top:6px}
+.rows-table th{font-size:10.5px;text-transform:uppercase;letter-spacing:0.03em;color:#888780;text-align:left;padding:4px 6px}
+.rows-table td{padding:4px 4px}
+.rows-table input,.rows-table select{width:100%;padding:6px 8px;border:1px solid #d0cfc8;border-radius:6px;font-size:12px;font-family:inherit}
+.rm-row{background:#FBE7E5;color:#8C2A20;border:none;width:26px;height:26px;border-radius:6px;cursor:pointer;font-size:13px}
+.add-row-btn{margin-top:8px;padding:7px 14px;border-radius:8px;border:1px dashed #534AB7;background:#fff;color:#534AB7;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+
+.file-item{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #e8e7e0;border-radius:12px;margin-bottom:10px;transition:all .15s}
+.file-item:hover{border-color:#AFA9EC;background:#f9f8ff}
+.file-item:last-child{margin-bottom:0}
+.file-icon{width:38px;height:38px;border-radius:9px;background:#FBE7E5;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-icon svg{width:18px;height:18px;stroke:#8C2A20;fill:none;stroke-width:1.8}
+.file-info{flex:1;min-width:0}
+.file-title{font-size:13px;font-weight:700;color:#1a1a18;margin-bottom:2px}
+.file-meta{font-size:11.5px;color:#888780;line-height:1.5}
+.file-actions{display:flex;gap:6px;flex-shrink:0}
+.file-btn{padding:7px 12px;border-radius:8px;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.file-btn.view{background:#3C3489;color:#fff;border:none}
+.file-btn.view:hover{background:#2c2669}
+.file-btn.dl{background:#fff;color:#5F5E5A;border:1px solid #d0cfc8}
+.file-btn.dl:hover{background:#f0efe8}
+.file-unavailable{font-size:11.5px;color:#8C2A20;background:#FBE7E5;border-radius:8px;padding:7px 10px;white-space:nowrap;font-weight:600}
+
+.modal-foot{padding:16px 22px;border-top:1px solid #f0efe8;display:flex;justify-content:flex-end;gap:10px}
+.btn-secondary{padding:9px 18px;border-radius:8px;border:1px solid #d0cfc8;background:#fff;color:#5F5E5A;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit}
+.btn-primary{padding:9px 18px;border-radius:8px;border:none;background:#3C3489;color:#fff;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit}
+.btn-primary:hover{background:#2c2669}
+
+@media(max-width:600px){.hero{flex-direction:column;align-items:flex-start}.year-bar{flex-wrap:wrap}.year-badge{margin-left:0}.form-grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>Kabupaten Kampar · Pemerintahan Desa</span>
+  <span>Standarisasi Penghasilan &amp; Belanja Desa</span>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-icon">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  </div>
+  <div>
+    <div class="hero-title">Standarisasi Penghasilan Tetap, Tunjangan, Insentif &amp; Honorarium</div>
+    <div class="hero-sub">Pemerintahan Desa di Kabupaten Kampar &nbsp;·&nbsp; Perbup 8/2020 · Perbup 11/2024 · Perbup 14/2025</div>
+  </div>
+</div>
+
+<!-- YEAR BAR -->
+<div class="year-bar">
+  <span class="year-label">Pilih peraturan:</span>
+  <button class="year-btn" onclick="setYear('2020',this)">2020</button>
+  <button class="year-btn" onclick="setYear('2024',this)">2024</button>
+  <button class="year-btn on" onclick="setYear('2025',this)">2025</button>
+  <span id="customYearBtns"></span>
+  <button class="compare-btn" id="cmpBtn" onclick="toggleCompare()">
+    <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+    Bandingkan
+  </button>
+  <button class="add-btn" onclick="openFileModal()">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    File Peraturan
+  </button>
+  <span class="year-badge" id="activeBadge">Perbup Tahun 2025</span>
+</div>
+
+<!-- =================== COMPARE VIEW =================== -->
+<div class="compare-panel" id="comparePanel">
+  <div class="card">
+    <div class="card-head">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      <span class="card-head-label">Perbandingan Penghasilan Tetap &amp; Tunjangan</span>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th>Uraian</th><th>Perbup 8/2020</th><th>Perbup 11/2024</th><th>Perbup 14/2025</th><th>Perubahan '24→'25</th></tr></thead>
+      <tbody>
+        <tr><td class="cmp-section" colspan="5">Penghasilan Tetap (per bulan)</td></tr>
+        <tr><td>Kepala Desa</td><td class="cmp-num cmp-na">tidak diatur</td><td class="cmp-num">3.000.000</td><td class="cmp-num">3.000.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Sekretaris Desa</td><td class="cmp-num cmp-na">tidak diatur</td><td class="cmp-num">2.250.000</td><td class="cmp-num">2.250.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Kepala Urusan / Seksi</td><td class="cmp-num cmp-na">tidak diatur</td><td class="cmp-num">2.200.000</td><td class="cmp-num">2.200.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Kepala Dusun</td><td class="cmp-num cmp-na">tidak diatur</td><td class="cmp-num">2.050.000</td><td class="cmp-num">2.050.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td class="cmp-section" colspan="5">Tunjangan BPD &amp; RT/RW (per bulan)</td></tr>
+        <tr><td>Ketua BPD</td><td class="cmp-num cmp-na">tidak diatur¹</td><td class="cmp-num">900.000</td><td class="cmp-num">900.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Anggota BPD</td><td class="cmp-num cmp-na">tidak diatur¹</td><td class="cmp-num">750.000</td><td class="cmp-num">750.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Rukun Warga / Rukun Tetangga</td><td class="cmp-num cmp-na">tidak diatur¹</td><td class="cmp-num">300.000</td><td class="cmp-num">300.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+      </tbody>
+    </table>
+    <div class="note">¹ Perbup 8/2020 hanya mengatur tambahan penghasilan &amp; operasional — penghasilan tetap Kades/perangkat serta tunjangan BPD/RT-RW pada masa itu diatur oleh Perbup Kampar No. 31/2019 (bukan bagian dari dokumen yang dibandingkan di sini).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+      <span class="card-head-label">Perbandingan Operasional Lembaga (Rp/tahun)</span>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th>Lembaga</th><th>Perbup 8/2020</th><th>Perbup 11/2024</th><th>Perbup 14/2025</th><th>Perubahan '24→'25</th></tr></thead>
+      <tbody>
+        <tr><td>BPD</td><td class="cmp-num">5.000.000</td><td class="cmp-num">7.500.000</td><td class="cmp-num">7.500.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>LPM</td><td class="cmp-num">4.000.000</td><td class="cmp-num">4.000.000</td><td class="cmp-num">5.000.000</td><td class="cmp-num cmp-up">▲ +1.000.000</td></tr>
+        <tr><td>PKK Desa</td><td class="cmp-num">4.000.000</td><td class="cmp-num">7.000.000</td><td class="cmp-num">7.000.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Posyandu</td><td class="cmp-num">2.500.000 /desa</td><td class="cmp-num">2.000.000 /unit</td><td class="cmp-num">2.000.000 /unit</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Karang Taruna / Pemuda &amp; Olahraga</td><td class="cmp-num">4.000.000</td><td class="cmp-num">4.000.000</td><td class="cmp-num">4.000.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>LINMAS</td><td class="cmp-num">3.600.000</td><td class="cmp-num">3.600.000</td><td class="cmp-num">5.000.000</td><td class="cmp-num cmp-up">▲ +1.400.000</td></tr>
+        <tr><td>Perawatan Rutin Ambulans Desa</td><td class="cmp-num cmp-na">—</td><td class="cmp-num cmp-na">—</td><td class="cmp-num">10.000.000</td><td class="cmp-num cmp-up">▲ Baru 2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+      <span class="card-head-label">Perbandingan Insentif Guru, Kader &amp; BPJS</span>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th>Uraian</th><th>Perbup 8/2020</th><th>Perbup 11/2024</th><th>Perbup 14/2025</th><th>Perubahan '24→'25</th></tr></thead>
+      <tbody>
+        <tr><td>Guru PAUD (per OB)</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Guru Taman Belajar Keagamaan / PDTA (per OB)</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Petugas Pustaka Desa (per OB)</td><td class="cmp-num cmp-na">—</td><td class="cmp-num cmp-na">—</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num cmp-up">▲ Baru 2025</td></tr>
+        <tr><td>Kader Pembangunan Manusia (per OB)</td><td class="cmp-num">200.000–500.000</td><td class="cmp-num">300.000–750.000</td><td class="cmp-num">300.000–750.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Kader Posyandu (per OB)</td><td class="cmp-num">50.000–150.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num">200.000–300.000</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Kader Teknis Desa (per OB)</td><td class="cmp-num">200.000–500.000</td><td class="cmp-num cmp-na">—</td><td class="cmp-num">300.000–500.000</td><td class="cmp-num cmp-up">▲ Diatur ulang 2025</td></tr>
+        <tr><td>BPJS Ketenagakerjaan (JKK+JK, per orang/bulan)</td><td class="cmp-num">13.500</td><td class="cmp-num">13.500</td><td class="cmp-num">13.500</td><td class="cmp-num cmp-same">Tetap</td></tr>
+        <tr><td>Jaminan Hari Tua / JHT (per orang/bulan)</td><td class="cmp-num cmp-na">—</td><td class="cmp-num cmp-na">—</td><td class="cmp-num">142.500</td><td class="cmp-num cmp-up">▲ Baru 2025²</td></tr>
+      </tbody>
+    </table>
+    <div class="note">² JHT baru dapat dianggarkan Desa pada 2025 setelah mendapat persetujuan BPD melalui musyawarah Desa.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      <span class="card-head-label">Perbandingan Honorarium Pengelolaan Keuangan Desa (per OB)</span>
+    </div>
+    <table class="cmp-table">
+      <thead><tr><th>Jabatan</th><th>Perbup 8/2020</th><th>Perbup 11/2024</th><th>Perbup 14/2025</th><th>Perubahan '24→'25</th></tr></thead>
+      <tbody>
+        <tr><td>PKPKD / Pengguna Anggaran</td><td class="cmp-num">150.000–250.000³</td><td class="cmp-num">500.000</td><td class="cmp-num">750.000</td><td class="cmp-num cmp-up">▲ +250.000</td></tr>
+        <tr><td>Koordinator / Ketua PPKD (Sekdes)</td><td class="cmp-num">100.000–200.000³</td><td class="cmp-num">400.000</td><td class="cmp-num">600.000</td><td class="cmp-num cmp-up">▲ +200.000</td></tr>
+        <tr><td>Anggota PPKD (Kaur/Kasi)</td><td class="cmp-num cmp-na">—</td><td class="cmp-num">350.000</td><td class="cmp-num">500.000</td><td class="cmp-num cmp-up">▲ +150.000</td></tr>
+        <tr><td>Pengelola Aset Desa</td><td class="cmp-num">50.000</td><td class="cmp-num">200.000</td><td class="cmp-num">350.000</td><td class="cmp-num cmp-up">▲ +150.000</td></tr>
+      </tbody>
+    </table>
+    <div class="note">³ Pada Perbup 8/2020 besaran bertingkat mengikuti jumlah pendapatan APBDesa (≤Rp1M / Rp1–1,5M / &gt;Rp1,5M). Nilai yang ditampilkan adalah rentang minimum–maksimum.</div>
+  </div>
+</div>
+
+<!-- =================== PERBUP 8 TAHUN 2020 =================== -->
+<div class="year-panel" id="panel2020">
+  <div class="status-banner dead">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    <div><b>Perbup Kampar No. 8 Tahun 2020</b> — dicabut &amp; dinyatakan tidak berlaku sejak berlakunya Perbup No. 11 Tahun 2024 (Pasal 5). Ditampilkan untuk referensi historis.</div>
+  </div>
+
+  <div class="nav" id="nav2020">
+    <button class="nav-btn on" onclick="swSec('keu20',this,'nav2020')">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Honor Keuangan
+    </button>
+    <button class="nav-btn" onclick="swSec('renc20',this,'nav2020')">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Perencanaan
+    </button>
+    <button class="nav-btn" onclick="swSec('ops20',this,'nav2020')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Operasional &amp; Insentif
+    </button>
+    <button class="nav-btn" onclick="swSec('bpjs20',this,'nav2020')">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>BPJS
+    </button>
+    <button class="nav-btn" onclick="swSec('lain20',this,'nav2020')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Honorarium Lainnya
+    </button>
+  </div>
+
+  <!-- KEU 2020 -->
+  <div id="keu20" class="sec on">
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span class="card-head-label">Honorarium Pengelolaan Keuangan &amp; Aset Desa</span>
+        <span class="card-head-pill"><span class="pill pill-pro">Per OB · bertingkat</span></span>
+      </div>
+      <table class="mini-table">
+        <thead><tr><th>Jabatan</th><th>≤ Rp1 M</th><th>&gt;Rp1–1,5 M</th><th>&gt; Rp1,5 M</th></tr></thead>
+        <tbody>
+          <tr><td>PKPKD (Pemegang Kekuasaan)</td><td class="n">150.000</td><td class="n">200.000</td><td class="n">250.000</td></tr>
+          <tr><td>Koordinator PPKD</td><td class="n">100.000</td><td class="n">150.000</td><td class="n">200.000</td></tr>
+          <tr><td>Kepala Urusan Keuangan</td><td class="n">50.000</td><td class="n">100.000</td><td class="n">150.000</td></tr>
+        </tbody>
+      </table>
+      <div class="note">Besaran dihitung berdasarkan jumlah pendapatan pada APBDesa.</div>
+      <div class="section-sep">
+        <div class="group-label">Pelaksana Kegiatan Anggaran (per kegiatan / OK)</div>
+        <div class="row"><div class="row-label">Dana ≤ Rp10 juta</div><div class="row-val">Rp 50.000</div></div>
+        <div class="row"><div class="row-label">Dana &gt;Rp10–30 juta</div><div class="row-val">Rp 100.000</div></div>
+        <div class="row"><div class="row-label">Dana &gt;Rp30–50 juta</div><div class="row-val">Rp 150.000</div></div>
+        <div class="row"><div class="row-label">Dana &gt;Rp50–200 juta</div><div class="row-val">Rp 200.000</div></div>
+        <div class="row"><div class="row-label">Dana &gt;Rp200 juta</div><div class="row-val">Rp 300.000</div></div>
+        <div class="row"><div class="row-label">Petugas Pengurus Aset Desa</div><div class="row-val">Rp 50.000 /OB</div></div>
+        <div class="note">Petugas aset desa: 1 orang dari Kaur Umum yang ditunjuk.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RENC 2020 -->
+  <div id="renc20" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="card-head-label">Tim Penyusun RPJM &amp; RKP Desa</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per OK</span></span>
+        </div>
+        <div class="group-label">Berlaku sama untuk RPJM Desa &amp; RKP Desa</div>
+        <div class="row"><div class="row-label">Pembina</div><div class="row-val">Rp 600.000</div></div>
+        <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris</div><div class="row-val">Rp 400.000</div></div>
+        <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 300.000</div></div>
+        <div class="note">Jumlah tim mengacu pada Perbup 63/2019 tentang Juknis Perencanaan Pembangunan Desa, disesuaikan kebutuhan Desa.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span class="card-head-label">Tim Verifikasi RKP Desa</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per OK · maks 5 orang</span></span>
+        </div>
+        <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 300.000</div></div>
+        <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 200.000</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPS 2020 -->
+  <div id="ops20" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span class="card-head-label">Operasional Organisasi Lembaga Kemasyarakatan</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per tahun</span></span>
+        </div>
+        <div class="row"><div class="row-label">BPD</div><div class="row-val">Rp 5.000.000</div></div>
+        <div class="row"><div class="row-label">LPM</div><div class="row-val">Rp 4.000.000</div></div>
+        <div class="row"><div class="row-label">PKK Desa</div><div class="row-val">Rp 4.000.000</div></div>
+        <div class="row"><div class="row-label">Posyandu</div><div class="row-val">Rp 2.500.000</div></div>
+        <div class="row"><div class="row-label">Pemuda dan Olahraga</div><div class="row-val">Rp 4.000.000</div></div>
+        <div class="row"><div class="row-label">LINMAS</div><div class="row-val">Rp 3.600.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span class="card-head-label">Insentif Guru &amp; Kader</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Per OB</span></span>
+        </div>
+        <div class="row"><div class="row-label">Guru PAUD</div><div class="row-val">Rp 200.000–300.000</div></div>
+        <div class="row"><div class="row-label">Guru Taman Belajar Keagamaan</div><div class="row-val">Rp 200.000–300.000</div></div>
+        <div class="row"><div class="row-label">Kader Posyandu</div><div class="row-val">Rp 50.000–150.000</div></div>
+        <div class="row"><div class="row-label">Kader Pemberdayaan Masyarakat Desa</div><div class="row-val">Rp 200.000–500.000</div></div>
+        <div class="row"><div class="row-label">Kader Teknis Desa</div><div class="row-val">Rp 200.000–500.000</div></div>
+        <div class="row"><div class="row-label">Kader Pembangunan Manusia</div><div class="row-val">Rp 200.000–500.000</div></div>
+        <div class="note">Kader hanya boleh menerima insentif dari satu posisi. Kader yang didanai pihak ketiga/Provinsi/Pusat mengikuti ketentuan masing-masing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BPJS 2020 -->
+  <div id="bpjs20" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="card-head-label">BPJS Ketenagakerjaan</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Per orang/bulan</span></span>
+        </div>
+        <div class="row"><div><div class="row-label">Kepala Desa, Sekretaris Desa, Kaur/Kasi, Kepala Dusun</div><div class="row-sub">JKK 0,24% (Rp 6.000) + JK 0,3% (Rp 7.500)</div></div><div class="row-val">Rp 13.500</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span class="card-head-label">BPJS Kesehatan</span>
+          <span class="card-head-pill"><span class="pill pill-green">1% pekerja + 4% pemberi kerja</span></span>
+        </div>
+        <div class="row"><div><div class="row-label">Kepala Desa</div><div class="row-sub">Penghasilan tetap asumsi Rp2.500.000</div></div><div class="row-val">Rp 125.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris Desa</div><div class="row-val">Rp 112.500</div></div>
+        <div class="row"><div class="row-label">Kepala Urusan</div><div class="row-val">Rp 110.000</div></div>
+        <div class="row"><div class="row-label">Kepala Dusun</div><div class="row-val">Rp 102.500</div></div>
+        <div class="note">Jumlah jiwa tertanggung: 1 peserta + 1 istri/suami + 3 orang anak.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAIN 2020 -->
+  <div id="lain20" class="sec">
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <span class="card-head-label">Honorarium Lainnya Penunjang Kegiatan Desa</span>
+      </div>
+      <div class="group-label">Panitia / Tim Musyawarah Desa (per Org/keg)</div>
+      <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 100.000</div></div>
+      <div class="row"><div class="row-label">Sekretaris</div><div class="row-val">Rp 75.000</div></div>
+      <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 50.000</div></div>
+      <div class="section-sep">
+        <div class="group-label">Tenaga Kebersihan &amp; Keamanan (per OB)</div>
+        <div class="row"><div class="row-label">Tenaga Kebersihan (1 orang/Desa)</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Hansip / Linmas (2 orang/Desa)</div><div class="row-val">Rp 500.000</div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Petugas Profil Desa</div>
+        <div class="row"><div class="row-label">Petugas Pendataan</div><div class="row-val">Rp 5.000 /KK</div></div>
+        <div class="row"><div class="row-label">Petugas Penginputan</div><div class="row-val">Rp 2.000 /KK</div></div>
+      </div>
+      <div class="note">Belanja Penanggulangan Bencana, Keadaan Darurat &amp; Mendesak Desa: maksimal Rp 20.000.000/tahun, tata cara mengacu Perbup Penyusunan APBDesa Kampar 2020.</div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PERBUP 11 TAHUN 2024 =================== -->
+<div class="year-panel" id="panel2024">
+  <div class="status-banner warn">
+    <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+    <div><b>Perbup Kampar No. 11 Tahun 2024</b> — sebagian lampirannya (honor pengelola keuangan, operasional LPM/LINMAS, honor tim pajak &amp; retribusi, dll.) telah diubah oleh Perbup No. 14 Tahun 2025. Data di bawah adalah versi asli 2024.</div>
+  </div>
+
+  <div class="nav" id="nav2024">
+    <button class="nav-btn on" onclick="swSec('gaji24',this,'nav2024')">
+      <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Gaji &amp; Tunjangan
+    </button>
+    <button class="nav-btn" onclick="swSec('honor24',this,'nav2024')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Insentif &amp; Honor
+    </button>
+    <button class="nav-btn" onclick="swSec('ops24',this,'nav2024')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Operasional
+    </button>
+  </div>
+
+  <!-- GAJI 2024 -->
+  <div id="gaji24" class="sec on">
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-val">Rp 3 jt</div><div class="stat-label">Kepala Desa / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,25 jt</div><div class="stat-label">Sekretaris Desa / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,2 jt</div><div class="stat-label">Kaur / Kasi / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,05 jt</div><div class="stat-label">Kepala Dusun / bulan</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span class="card-head-label">Penghasilan tetap</span>
+          <span class="card-head-pill"><span class="pill pill-pro">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Kepala Desa</div><div class="row-val">Rp 3.000.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris Desa</div><div class="row-val">Rp 2.250.000</div></div>
+        <div class="row"><div class="row-label">Kepala Urusan / Seksi</div><div class="row-val">Rp 2.200.000</div></div>
+        <div class="row"><div class="row-label">Kepala Dusun</div><div class="row-val">Rp 2.050.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/></svg>
+          <span class="card-head-label">Tunjangan kepala desa &amp; perangkat</span>
+          <span class="card-head-pill"><span class="pill pill-green">Per tahun</span></span>
+        </div>
+        <div class="row"><div class="row-label">Kepala Desa</div><div class="row-val">Rp 3.000.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris Desa</div><div class="row-val">Rp 2.250.000</div></div>
+        <div class="row"><div class="row-label">Kepala Urusan / Seksi</div><div class="row-val">Rp 2.200.000</div></div>
+        <div class="row"><div class="row-label">Kepala Dusun</div><div class="row-val">Rp 2.050.000</div></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="card-head-label">Tunjangan BPD</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Ketua BPD</div><div class="row-val">Rp 900.000</div></div>
+        <div class="row"><div class="row-label">Anggota BPD</div><div class="row-val">Rp 750.000</div></div>
+        <div class="section-sep">
+          <div class="group-label">Insentif RT / RW</div>
+          <div class="row"><div class="row-label">Rukun Warga &amp; Rukun Tetangga</div><div class="row-val">Rp 300.000</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="card-head-label">BPJS Ketenagakerjaan</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Per orang/bulan</span></span>
+        </div>
+        <div class="row"><div><div class="row-label">Kades, Sekdes, Kaur/Kasi, Kadus, RT &amp; RW</div><div class="row-sub">JKK 0,24% (Rp 6.000) + JK 0,3% (Rp 7.500)</div></div><div class="row-val">Rp 13.500</div></div>
+        <div class="note">Berbeda dari 2025: RT/RW turut dicakup dalam tabel BPJS Ketenagakerjaan pada Perbup 11/2024.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HONOR 2024 -->
+  <div id="honor24" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span class="card-head-label">Insentif guru &amp; kader</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Insentif Guru PAUD &amp; Taman Belajar Keagamaan</div><div class="row-val">Rp 200.000–300.000</div></div>
+        <div class="row"><div class="row-label">Kader Pembangunan Manusia</div><div class="row-val">Rp 300.000–750.000</div></div>
+        <div class="row"><div class="row-label">Kader Posyandu</div><div class="row-val">Rp 200.000–300.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span class="card-head-label">Honor Pengelola Keuangan &amp; Aset Desa</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Per OB · 12 bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">PKPKD / Pengguna anggaran</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Koordinator PPKD — Ketua (Sekdes)</div><div class="row-val">Rp 400.000</div></div>
+        <div class="row"><div class="row-label">Koordinator PPKD — Anggota (Kaur/Kasi)</div><div class="row-val">Rp 350.000</div></div>
+        <div class="row"><div class="row-label">Pengelola Aset Desa</div><div class="row-val">Rp 200.000</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="card-head-label">Honorarium tim penyusun &amp; kegiatan lainnya</span>
+      </div>
+      <div class="group-label">Tim Penyusun RPJM Desa (maks. 7 orang, per OK)</div>
+      <div class="row"><div class="row-label">Penanggungjawab / Kades</div><div class="row-val">Rp 1.000.000</div></div>
+      <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 750.000</div></div>
+      <div class="row"><div class="row-label">Sekretaris</div><div class="row-val">Rp 500.000</div></div>
+      <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 300.000</div></div>
+      <div class="section-sep">
+        <div class="group-label">Tim Penyusun RKP Desa (maks. 7 orang, per OK)</div>
+        <div class="row"><div class="row-label">Penanggungjawab</div><div class="row-val">Rp 750.000</div></div>
+        <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris</div><div class="row-val">Rp 350.000</div></div>
+        <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 250.000</div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Tim Percepatan Pendapatan Pajak &amp; Retribusi Desa (per OB)</div>
+        <div class="row"><div class="row-label">Penanggungjawab (Kepala Desa)</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Ketua (Sekretaris Desa)</div><div class="row-val">Rp 300.000</div></div>
+        <div class="row"><div class="row-label">Anggota (Kolektor)</div><div class="row-val">Rp 200.000</div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Tim Pendataan / Pemutakhiran Data IDM Berbasis SDGs</div>
+        <div class="row"><div class="row-label">Pembina / Kades</div><div><div class="row-val">Rp 1.000.000</div><div class="row-range">per OK</div></div></div>
+        <div class="row"><div class="row-label">Ketua / Sekdes</div><div><div class="row-val">Rp 750.000</div><div class="row-range">per OK</div></div></div>
+        <div class="row"><div class="row-label">Sekretaris / Kasi Pemerintah Desa</div><div><div class="row-val">Rp 500.000</div><div class="row-range">per OK</div></div></div>
+        <div class="row"><div class="row-label">Pendata</div><div><div class="row-val">Rp 5.000</div><div class="row-range">per KK</div></div></div>
+        <div class="row"><div class="row-label">Enumerator</div><div><div class="row-val">Rp 3.000</div><div class="row-range">per KK</div></div></div>
+      </div>
+      <div class="note">Honor tenaga kebersihan, operator komputer/staf, sopir ambulan: Rp 1.000.000/OB. Hansip/Linmas: Rp 200.000/OB — maksimal 2 orang per Desa, hanya boleh menerima insentif dari satu posisi.</div>
+    </div>
+  </div>
+
+  <!-- OPS 2024 -->
+  <div id="ops24" class="sec">
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        <span class="card-head-label">Operasional Organisasi Masyarakat Desa</span>
+        <span class="card-head-pill"><span class="pill pill-blue">Per tahun</span></span>
+      </div>
+      <div class="row"><div class="row-label">BPD</div><div class="row-val">Rp 7.500.000</div></div>
+      <div class="row"><div class="row-label">LPM</div><div class="row-val">Rp 4.000.000</div></div>
+      <div class="row"><div class="row-label">PKK Desa</div><div class="row-val">Rp 7.000.000</div></div>
+      <div class="row"><div class="row-label">Posyandu</div><div><div class="row-val">Rp 2.000.000</div><div class="row-range">per unit/tahun</div></div></div>
+      <div class="row"><div class="row-label">Karang Taruna / Pemuda</div><div class="row-val">Rp 4.000.000</div></div>
+      <div class="row"><div class="row-label">LINMAS</div><div class="row-val">Rp 3.600.000</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== PERBUP 14 TAHUN 2025 =================== -->
+<div class="year-panel on" id="panel2025">
+  <div class="status-banner ok">
+    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <div><b>Perbup Kampar No. 14 Tahun 2025</b> — perubahan atas Perbup 11/2024, berlaku sejak diundangkan 29 April 2025.</div>
+  </div>
+
+  <div class="nav" id="nav2025">
+    <button class="nav-btn on" onclick="swSec('gaji25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Gaji &amp; Tunjangan
+    </button>
+    <button class="nav-btn" onclick="swSec('honor25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>Insentif &amp; Honor
+    </button>
+    <button class="nav-btn" onclick="swSec('ops25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Operasional
+    </button>
+    <button class="nav-btn" onclick="swSec('dinas25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Perjalanan Dinas
+    </button>
+    <button class="nav-btn" onclick="swSec('barang25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/></svg>Belanja Barang
+    </button>
+    <button class="nav-btn" onclick="swSec('prod25',this,'nav2025')">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Biaya Produksi
+    </button>
+  </div>
+
+  <!-- GAJI 2025 -->
+  <div id="gaji25" class="sec on">
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-val">Rp 3 jt</div><div class="stat-label">Kepala Desa / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,25 jt</div><div class="stat-label">Sekretaris Desa / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,2 jt</div><div class="stat-label">Kaur / Kasi / bulan</div></div>
+      <div class="stat"><div class="stat-val">Rp 2,05 jt</div><div class="stat-label">Kepala Dusun / bulan</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span class="card-head-label">Penghasilan tetap</span>
+          <span class="card-head-pill"><span class="pill pill-pro">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Kepala Desa</div><div class="row-val">Rp 3.000.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris Desa</div><div class="row-val">Rp 2.250.000</div></div>
+        <div class="row"><div class="row-label">Kepala Urusan / Seksi</div><div class="row-val">Rp 2.200.000</div></div>
+        <div class="row"><div class="row-label">Kepala Dusun</div><div class="row-val">Rp 2.050.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          <span class="card-head-label">Tunjangan kepala desa &amp; perangkat</span>
+          <span class="card-head-pill"><span class="pill pill-green">Per tahun</span></span>
+        </div>
+        <div class="row"><div class="row-label">Kepala Desa</div><div class="row-val">Rp 3.000.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris Desa</div><div class="row-val">Rp 2.250.000</div></div>
+        <div class="row"><div class="row-label">Kepala Urusan / Seksi</div><div class="row-val">Rp 2.200.000</div></div>
+        <div class="row"><div class="row-label">Kepala Dusun</div><div class="row-val">Rp 2.050.000</div></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="card-head-label">Tunjangan BPD</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Ketua BPD</div><div class="row-val">Rp 900.000</div></div>
+        <div class="row"><div class="row-label">Anggota BPD</div><div class="row-val">Rp 750.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="card-head-label">BPJS Ketenagakerjaan</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Per orang/bulan</span></span>
+        </div>
+        <div class="row">
+          <div><div class="row-label">Kades, Sekdes, Kaur/Kasi, Kepala Dusun</div><div class="row-sub">JKK 0,24% (Rp 6.000) + JK 0,3% (Rp 7.500)</div></div>
+          <div class="row-val">Rp 13.500</div>
+        </div>
+        <div class="note">JHT dapat dianggarkan Rp 142.500/orang/bulan setelah persetujuan BPD melalui musyawarah Desa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HONOR 2025 -->
+  <div id="honor25" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <span class="card-head-label">Insentif RT / RW</span>
+          <span class="card-head-pill"><span class="pill pill-pro">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Rukun Warga (RW)</div><div class="row-val">Rp 300.000</div></div>
+        <div class="row"><div class="row-label">Rukun Tetangga (RT)</div><div class="row-val">Rp 300.000</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span class="card-head-label">Insentif guru &amp; kader</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per bulan</span></span>
+        </div>
+        <div class="row"><div class="row-label">Guru PAUD / PDTA</div><div class="row-val">Rp 200.000 – 300.000</div></div>
+        <div class="row"><div class="row-label">Petugas Pustaka Desa</div><div class="row-val">Rp 200.000 – 300.000</div></div>
+        <div class="row"><div class="row-label">Kader Pembangunan Manusia</div><div class="row-val">Rp 300.000 – 750.000</div></div>
+        <div class="row"><div class="row-label">Kader Posyandu Kesehatan</div><div class="row-val">Rp 200.000 – 300.000</div></div>
+        <div class="row"><div class="row-label">Kader Teknis Pembangunan</div><div class="row-val">Rp 300.000 – 500.000</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span class="card-head-label">Honor Pengelola Keuangan &amp; Aset Desa</span>
+        <span class="card-head-pill"><span class="pill pill-amber">Per OB · 12 bulan</span></span>
+      </div>
+      <div class="row"><div class="row-label">PKPKD / Pengguna anggaran</div><div class="row-val">Rp 750.000</div></div>
+      <div class="row"><div class="row-label">Koordinator PPKD — Ketua (Sekdes)</div><div class="row-val">Rp 600.000</div></div>
+      <div class="row"><div class="row-label">Koordinator PPKD — Anggota (Kaur/Kasi)</div><div class="row-val">Rp 500.000</div></div>
+      <div class="row"><div class="row-label">Pengelola Aset Desa</div><div class="row-val">Rp 350.000</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="card-head-label">Honorarium tim penyusun &amp; panitia</span>
+      </div>
+      <div class="group-label">Tim Penyusun RPJM Desa (maks. 7 orang)</div>
+      <div class="row"><div class="row-label">Penanggungjawab / Kades</div><div class="row-val">Rp 1.000.000</div></div>
+      <div class="row"><div class="row-label">Ketua</div><div class="row-val">Rp 750.000</div></div>
+      <div class="row"><div class="row-label">Sekretaris</div><div class="row-val">Rp 500.000</div></div>
+      <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 300.000</div></div>
+      <div class="section-sep">
+        <div class="group-label">Tim Penyusun RKP Desa / APB Desa (maks. 8 orang)</div>
+        <div class="row"><div class="row-label">Penanggungjawab (Kepala Desa)</div><div class="row-val">Rp 750.000</div></div>
+        <div class="row"><div class="row-label">Ketua (Sekretaris Desa)</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris (Kaur Perencanaan)</div><div class="row-val">Rp 350.000</div></div>
+        <div class="row"><div class="row-label">Anggota</div><div class="row-val">Rp 250.000</div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Peningkatan Pendapatan Pajak &amp; Retribusi Desa (masa kerja 3 bulan)</div>
+        <div class="row"><div class="row-label">Penanggungjawab (Kepala Desa)</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Ketua (Sekretaris Desa)</div><div class="row-val">Rp 400.000</div></div>
+        <div class="row"><div class="row-label">Anggota (Kolektor)</div><div class="row-val">Rp 300.000</div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Tim Pendataan / Pemutakhiran Data IDM Berbasis SDGs</div>
+        <div class="row"><div class="row-label">Pembina / Kades</div><div class="row-val">Rp 1.000.000</div></div>
+        <div class="row"><div class="row-label">Ketua / Sekdes</div><div class="row-val">Rp 750.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris / Kasi Pemerintah Desa</div><div class="row-val">Rp 500.000</div></div>
+        <div class="row"><div class="row-label">Pendata</div><div><div class="row-val">Rp 5.000</div><div class="row-range">per KK</div></div></div>
+        <div class="row"><div class="row-label">Enumerator</div><div><div class="row-val">Rp 3.000</div><div class="row-range">per KK</div></div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Pelatihan / Sosialisasi / Penyuluhan</div>
+        <div class="row"><div class="row-label">Narasumber Tingkat Provinsi</div><div><div class="row-val">Rp 1.000.000</div><div class="row-range">per JPL</div></div></div>
+        <div class="row"><div class="row-label">Narasumber Tingkat Kabupaten</div><div><div class="row-val">Rp 900.000</div><div class="row-range">per JPL</div></div></div>
+        <div class="row"><div class="row-label">Narasumber Tingkat Kecamatan</div><div><div class="row-val">Rp 700.000</div><div class="row-range">per JPL</div></div></div>
+        <div class="row"><div class="row-label">Moderator</div><div class="row-val">Rp 600.000</div></div>
+        <div class="row"><div class="row-label">Ketua Panitia</div><div class="row-val">Rp 400.000</div></div>
+        <div class="row"><div class="row-label">Sekretaris / Anggota</div><div class="row-val">Rp 300.000</div></div>
+        <div class="row"><div class="row-label">Transportasi Peserta</div><div><div class="row-val">Rp 100.000</div><div class="row-range">orang/kali</div></div></div>
+        <div class="row"><div class="row-label">Uang Saku Peserta</div><div><div class="row-val">Rp 100.000</div><div class="row-range">orang/hari</div></div></div>
+      </div>
+      <div class="section-sep">
+        <div class="group-label">Bimbingan Teknis Aparatur Pemerintahan Desa</div>
+        <div class="row"><div class="row-label">Biaya Kontribusi</div><div><div class="row-val">Rp 4.000.000</div><div class="row-range">per kegiatan</div></div></div>
+        <div class="row"><div class="row-label">Uang Saku Peserta</div><div><div class="row-val">Rp 100.000</div><div class="row-range">orang/hari</div></div></div>
+        <div class="note">Dilaksanakan minimal 3 hari 2 malam.</div>
+      </div>
+      <div class="note">Tenaga kebersihan, operator, sopir ambulan: Rp 1.000.000/OB. Linmas: Rp 200.000/OB. Hanya boleh menerima insentif dari satu posisi.</div>
+    </div>
+  </div>
+
+  <!-- OPS 2025 -->
+  <div id="ops25" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span class="card-head-label">Biaya operasional lembaga</span>
+          <span class="card-head-pill"><span class="pill pill-blue">Per tahun</span></span>
+        </div>
+        <div class="row"><div class="row-label">BPD</div><div class="row-val">Rp 7.500.000</div></div>
+        <div class="row"><div class="row-label">PKK Desa</div><div class="row-val">Rp 7.000.000</div></div>
+        <div class="row"><div class="row-label">LPM</div><div class="row-val">Rp 5.000.000</div></div>
+        <div class="row"><div class="row-label">LINMAS</div><div class="row-val">Rp 5.000.000</div></div>
+        <div class="row"><div class="row-label">Karang Taruna / Pemuda</div><div class="row-val">Rp 4.000.000</div></div>
+        <div class="row"><div class="row-label">Posyandu Kesehatan</div><div><div class="row-val">Rp 2.000.000</div><div class="row-range">per unit/tahun</div></div></div>
+        <div class="row"><div class="row-label">Perawatan Ambulans Desa</div><div class="row-val">Rp 10.000.000</div></div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px">
+          <div class="card-head">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span class="card-head-label">Honor TPK — batas maksimal</span>
+          </div>
+          <div class="tier"><div class="tier-label">≤ Rp 50 juta</div><div class="tier-val">7%</div></div>
+          <div class="tier"><div class="tier-label">Rp 50 juta – Rp 100 juta</div><div class="tier-val">6%</div></div>
+          <div class="tier"><div class="tier-label">Rp 100 juta – Rp 200 juta</div><div class="tier-val">5,5%</div></div>
+          <div class="tier"><div class="tier-label">&gt; Rp 200 juta</div><div class="tier-val">5%</div></div>
+          <div class="note">Distribusi: Administrasi Kegiatan 10% · Honor TPK 65% (Ketua 45% · Sekretaris 30% · Anggota 25%) · Biaya Perencanaan 25%.</div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span class="card-head-label">Honor PPHP — batas maksimal</span>
+          </div>
+          <div class="tier"><div class="tier-label">≤ Rp 50 juta</div><div class="tier-val">5%</div></div>
+          <div class="tier"><div class="tier-label">Rp 50 juta – Rp 100 juta</div><div class="tier-val">4%</div></div>
+          <div class="tier"><div class="tier-label">Rp 100 juta – Rp 200 juta</div><div class="tier-val">4%</div></div>
+          <div class="note">Distribusi: Administrasi Kegiatan 10% · Honor PPHP 90% (Ketua 45% · Sekretaris 30% · Anggota 25%).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DINAS 2025 -->
+  <div id="dinas25" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="card-head-label">Uang harian perjalanan dinas</span>
+        </div>
+        <div class="row"><div class="row-label">Luar Provinsi</div><div class="row-val" style="font-size:11px">Mengacu SBU Kabupaten</div></div>
+        <div class="row"><div class="row-label">Ibukota Provinsi (Pekanbaru)</div><div><div class="row-val">Rp 370.000</div><div class="row-range">orang/hari</div></div></div>
+        <div class="row"><div class="row-label">Ibukota Kabupaten (Bangkinang)</div><div><div class="row-val">Rp 150.000</div><div class="row-range">orang/hari</div></div></div>
+        <div class="row"><div class="row-label">Ibukota Kecamatan</div><div><div class="row-val">Rp 60.000</div><div class="row-range">orang/hari</div></div></div>
+        <div class="note">Bantuan transportasi ke ibukota provinsi: Rp 200.000/orang/kali. Dibayarkan per Surat Tugas.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="card-head-label">Bantuan transportasi ke ibukota kabupaten</span>
+        </div>
+        <div class="map-item"><div class="map-dot"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="map-kec">Bangkinang Kota, Bangkinang, Salo</div><div class="map-rp">Rp 50.000</div></div>
+        <div class="map-item"><div class="map-dot"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="map-kec">XIII Koto Kampar, Kuok, Kampar, Kampar Utara, Rumbio Jaya, Kampa</div><div class="map-rp">Rp 100.000</div></div>
+        <div class="map-item"><div class="map-dot"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="map-kec">Tapung, Kampar Kiri Tengah/Hilir, Perhentian Raja, Siak Hulu, Gunung Sahilan</div><div class="map-rp">Rp 150.000</div></div>
+        <div class="map-item"><div class="map-dot"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="map-kec">Tapung Hulu/Hilir, Koto Kampar Hulu, Kampar Kiri, Kampar Kiri Hulu</div><div class="map-rp">Rp 200.000</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BARANG 2025 -->
+  <div id="barang25" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/></svg>
+          <span class="card-head-label">Pakaian Dinas (Seragam &amp; Atribut)</span>
+        </div>
+        <div class="row"><div class="row-label">PDU Kepala Desa</div><div class="row-val">Rp 2.500.000 /stel</div></div>
+        <div class="row"><div class="row-label">PDH Kuning Khaki &amp; Putih (Kades &amp; Perangkat)</div><div class="row-val">Rp 800.000 /stel</div></div>
+        <div class="row"><div class="row-label">Seragam BPD</div><div class="row-val">Rp 700.000 /stel</div></div>
+        <div class="row"><div class="row-label">Pakaian Olahraga</div><div class="row-val">Rp 400.000 /stel</div></div>
+        <div class="row"><div class="row-label">Pakaian Melayu</div><div class="row-val">Rp 600.000 /stel</div></div>
+        <div class="row"><div class="row-label">Baju Batik Kampar</div><div class="row-val">Rp 400.000 /lembar</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span class="card-head-label">Pembangunan Aplikasi Digitalisasi Desa</span>
+          <span class="card-head-pill"><span class="pill pill-green">Rp 45.000.000/keg</span></span>
+        </div>
+        <div class="row"><div class="row-label">Paket Aplikasi</div><div class="row-val">Rp 23.000.000</div></div>
+        <div class="row"><div class="row-label">Anjungan Digitalisasi</div><div class="row-val">Rp 22.000.000</div></div>
+        <div class="note">Anjungan terdiri dari: Box Anjungan, Monitor, CPU, Printer, Keyboard &amp; Mouse.</div>
+        <div class="section-sep">
+          <div class="group-label">Belanja lain (mengacu SSH/SBU tahun berjalan)</div>
+          <div class="row"><div class="row-label">ATK, cetak-penggandaan, konsumsi, dll.</div><div class="row-val" style="font-size:11px">Sesuai SSH</div></div>
+          <div class="row"><div class="row-label">Air, telepon, listrik, BBM</div><div class="row-val" style="font-size:11px">Real cost</div></div>
+          <div class="row"><div class="row-label">Pengurusan pajak kendaraan bermotor</div><div class="row-val" style="font-size:11px">Sesuai Perda Provinsi</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUKSI 2025 -->
+  <div id="prod25" class="sec">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="card-head-label">Padi sawah / 1 Ha</span>
+          <span class="card-head-pill"><span class="pill pill-green">Total Rp 17.475.000</span></span>
+        </div>
+        <div class="group-label">Sarana produksi</div>
+        <div class="row"><div class="row-label">Benih (25 Kg)</div><div class="row-val">Rp 375.000</div></div>
+        <div class="row"><div class="row-label">Dolomit (1.000 Kg)</div><div class="row-val">Rp 1.150.000</div></div>
+        <div class="row"><div class="row-label">Pupuk kandang (2.000 Kg)</div><div class="row-val">Rp 2.600.000</div></div>
+        <div class="row"><div class="row-label">Pupuk Urea (200 Kg)</div><div class="row-val">Rp 1.568.000</div></div>
+        <div class="row"><div class="row-label">Pupuk TSP (100 Kg)</div><div class="row-val">Rp 1.176.000</div></div>
+        <div class="row"><div class="row-label">Pupuk KCL (100 Kg)</div><div class="row-val">Rp 896.000</div></div>
+        <div class="row"><div class="row-label">Herbisida (5 L) + Insektisida (2 L)</div><div class="row-val">Rp 1.480.000</div></div>
+        <div class="section-sep">
+          <div class="group-label">Upah kerja</div>
+          <div class="row"><div class="row-label">Pengolahan tanah</div><div class="row-val">Rp 2.500.000</div></div>
+          <div class="row"><div class="row-label">Penanaman (5 HOK)</div><div class="row-val">Rp 650.000</div></div>
+          <div class="row"><div class="row-label">Penyiangan 2x (10 HOK)</div><div class="row-val">Rp 1.300.000</div></div>
+          <div class="row"><div class="row-label">Pemupukan (6,5 karung)</div><div class="row-val">Rp 130.000</div></div>
+          <div class="row"><div class="row-label">Penyemprotan hama</div><div class="row-val">Rp 900.000</div></div>
+          <div class="row"><div class="row-label">Pemanenan (100 Karung)</div><div class="row-val">Rp 2.750.000</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="card-head-label">Jagung pipil / 1 Ha</span>
+          <span class="card-head-pill"><span class="pill pill-amber">Total Rp 23.634.000</span></span>
+        </div>
+        <div class="group-label">Sarana produksi</div>
+        <div class="row"><div class="row-label">Benih (20 Kg)</div><div class="row-val">Rp 1.320.000</div></div>
+        <div class="row"><div class="row-label">Dolomit (2.000 Kg)</div><div class="row-val">Rp 2.300.000</div></div>
+        <div class="row"><div class="row-label">Pupuk kandang (1.000 Kg)</div><div class="row-val">Rp 1.500.000</div></div>
+        <div class="row"><div class="row-label">Pupuk Urea (350 Kg)</div><div class="row-val">Rp 2.744.000</div></div>
+        <div class="row"><div class="row-label">Pupuk SP36 (150 Kg)</div><div class="row-val">Rp 1.764.000</div></div>
+        <div class="row"><div class="row-label">Pupuk KCL (100 Kg)</div><div class="row-val">Rp 896.000</div></div>
+        <div class="row"><div class="row-label">Herbisida (5 L) + Insektisida (4 L)</div><div class="row-val">Rp 2.210.000</div></div>
+        <div class="section-sep">
+          <div class="group-label">Upah kerja</div>
+          <div class="row"><div class="row-label">Pengolahan tanah</div><div class="row-val">Rp 3.000.000</div></div>
+          <div class="row"><div class="row-label">Penugalan / penanaman (15 HOK)</div><div class="row-val">Rp 2.250.000</div></div>
+          <div class="row"><div class="row-label">Penyiangan gulma (15 HOK)</div><div class="row-val">Rp 2.250.000</div></div>
+          <div class="row"><div class="row-label">Penaburan dolomit (40 karung)</div><div class="row-val">Rp 400.000</div></div>
+          <div class="row"><div class="row-label">Penyemprotan hama (6 HOK)</div><div class="row-val">Rp 900.000</div></div>
+          <div class="row"><div class="row-label">Penebaran pupuk kandang (4 HOK)</div><div class="row-val">Rp 600.000</div></div>
+          <div class="row"><div class="row-label">Pemanenan (10 HOK)</div><div class="row-val">Rp 1.500.000</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="note">Belanja Modal Desa mengikuti Satuan Standar Harga (SSH) Kabupaten Kampar yang berlaku pada tahun berjalan.</div>
+  </div>
+</div><!-- end panel2025 -->
+
+</div><!-- end wrap -->
+
+<!-- =================== MODAL: FILE PERATURAN =================== -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <h3>File Peraturan</h3>
+        <p>Dokumen resmi Peraturan Bupati Kampar terkait Standarisasi Penghasilan Desa</p>
+      </div>
+      <button class="modal-close" onclick="closeAddModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="file-item">
+        <div class="file-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="file-info">
+          <div class="file-title">Perbup Kampar No. 11 Tahun 2024</div>
+          <div class="file-meta">Standarisasi Penghasilan Tetap, Tunjangan, Insentif, Honorarium, Operasional, Biaya Perjalanan Dinas dan Biaya BPJS Ketenagakerjaan Pemerintah Desa · Ditetapkan 2 Mei 2024</div>
+        </div>
+        <div class="file-actions">
+          <a class="file-btn view" href="Perbup_Kampar_No11_Tahun2024.pdf" target="_blank" rel="noopener">Buka</a>
+          <a class="file-btn dl" href="Perbup_Kampar_No11_Tahun2024.pdf" download>Unduh</a>
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="file-info">
+          <div class="file-title">Perbup Kampar No. 14 Tahun 2025</div>
+          <div class="file-meta">Perubahan Atas Perbup No. 11 Tahun 2024 tentang Standarisasi Penghasilan Tetap, Tunjangan, Insentif dan Biaya BPJS Pemerintah Desa · Ditetapkan 29 April 2025</div>
+        </div>
+        <div class="file-actions">
+          <a class="file-btn view" href="Perbup_Kampar_No14_Tahun2025.pdf" target="_blank" rel="noopener">Buka</a>
+          <a class="file-btn dl" href="Perbup_Kampar_No14_Tahun2025.pdf" download>Unduh</a>
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="file-info">
+          <div class="file-title">Perbup Kampar No. 8 Tahun 2020</div>
+          <div class="file-meta">Standarisasi Tambahan Penghasilan, Honorarium, Operasional BPD, Operasional Organisasi/Lembaga Kemasyarakatan, Bantuan Insentif Guru PAUD &amp; Taman Belajar Keagamaan, Bantuan Insentif Kader, Biaya BPJS Ketenagakerjaan dan BPJS Kesehatan · Tahun 2020</div>
+        </div>
+        <div class="file-actions">
+          <a class="file-btn view" href="Perbup_Kampar_No8_Tahun2020.pdf" target="_blank" rel="noopener">Buka</a>
+          <a class="file-btn dl" href="Perbup_Kampar_No8_Tahun2020.pdf" download>Unduh</a>
+        </div>
+      </div>
+
+      <div class="note">PDF yang tersedia dapat dibuka di tab baru atau diunduh melalui tombol pada masing-masing dokumen.</div>
+
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeAddModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:0">
+<footer>
+  Standarisasi Penghasilan Tetap, Tunjangan, Insentif, Honorarium, Operasional, Biaya Perjalanan Dinas dan Biaya BPJS Ketenagakerjaan<br>
+  Pemerintahan Desa di Kabupaten Kampar · Perbup Kampar No. 8/2020 · No. 11/2024 · No. 14/2025
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
+var activeYear = '2025';
+var compareMode = false;
+var customCounter = 0;
+
+function setYear(y, btn) {
+  if (compareMode) return;
+  activeYear = y;
+  document.querySelectorAll('.year-btn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.year-panel').forEach(function(p){ p.classList.remove('on'); });
+  var panel = document.getElementById('panel' + y);
+  if (panel) panel.classList.add('on');
+  document.getElementById('activeBadge').textContent = 'Perbup Tahun ' + y;
+}
+
+function toggleCompare() {
+  compareMode = !compareMode;
+  var btn = document.getElementById('cmpBtn');
+  var cp = document.getElementById('comparePanel');
+  if (compareMode) {
+    btn.classList.add('on');
+    cp.classList.add('on');
+    document.querySelectorAll('.year-panel').forEach(function(p){ p.classList.remove('on'); });
+    document.getElementById('activeBadge').textContent = 'Mode Perbandingan';
+    document.querySelectorAll('.year-btn').forEach(function(b){ b.classList.remove('on'); });
+  } else {
+    btn.classList.remove('on');
+    cp.classList.remove('on');
+    var panel = document.getElementById('panel' + activeYear);
+    if (panel) panel.classList.add('on');
+    document.getElementById('activeBadge').textContent = 'Perbup Tahun ' + activeYear;
+    document.querySelectorAll('.year-btn').forEach(function(b) {
+      if (b.textContent.trim() == activeYear) b.classList.add('on');
+    });
+  }
+}
+
+function swSec(id, btn, navId) {
+  var nav = btn.closest('.nav') || document.getElementById(navId);
+  if (nav) nav.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  var panel = btn.closest('.year-panel');
+  if (panel) panel.querySelectorAll('.sec').forEach(function(s){ s.classList.remove('on'); });
+  document.getElementById(id).classList.add('on');
+}
+
+/* ============ FILE PERATURAN ============ */
+function openFileModal() {
+  document.getElementById('addModal').classList.add('on');
+}
+function closeAddModal() {
+  document.getElementById('addModal').classList.remove('on');
+}
+
+</script>
+</body>
+</html>
